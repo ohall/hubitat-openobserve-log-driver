@@ -2,7 +2,7 @@ import groovy.json.JsonSlurper
 import groovy.json.JsonOutput
 
 metadata {
-    definition (name: "OpenObserve", namespace: "hubitatuser12", author: "Hubitat User 12") {
+    definition (name: "OpenObserve", namespace: "hubitatuser349", author: "Hubitat User 349") {
         capability "Initialize"
     }
     command "disconnect"
@@ -109,23 +109,6 @@ void connect() {
     try {
         interfaces.webSocket.connect("http://localhost:8080/logsocket")
         pauseExecution(1000)
-    } catch (Exception e) {
-        log.error "initialize error: ${e.message}"
-        runIn(60, connect)
-    }
-}
-
-void uninstalled() {
-    disconnect()
-}
-
-void webSocketStatus(String message) {
-    if (logEnable) log.debug "Got status ${message}"
-    if (message.startsWith("failure")) {
-        runIn(5, connect)
-    }
-}
-
     } catch (Exception e) {
         log.error "initialize error: ${e.message}"
         runIn(60, connect)
