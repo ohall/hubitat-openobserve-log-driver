@@ -66,8 +66,7 @@ void sendToOpenObserve(String logString) {
         "Content-Type": "application/json",
         host: hostname
     ]
-    def postData = JsonOutput.toJson(["data": logString])
-    httpPost(uri, path, postData, headers)
+    httpPost(uri, path, logString, headers)
 }
 
 void httpPost(String uri, String path, String postData, Map headers) {
