@@ -8,9 +8,10 @@ metadata {
     command "disconnect"
 
     preferences {
-        input("org", "text", title: "OpenObserve Org", description: "OpeObserve Organization", required: true)
+        input("org", "text", title: "OpenObserve Org", description: "OpeObserve Organization name", required: true)
         input("hostname", "text", title: "OpenObserve Hostname", description: "hostname OpenObserve API", required: true, defaultValue: "api.openobserve.ai")
         input("authToken", "text", title: "Authorization Token for OpenObserve", description: "Authorization token for OpenObserve API access", required: true)
+        input("stream", "text", title: "OpenObserve stream", description: "OpenObserve stream name", required: true)
         input("logEnable", "bool", title: "Enable debug logging", description: "", defaultValue: false)
     }
 }
@@ -59,7 +60,7 @@ void parse(String description) {
 
 void sendToOpenObserve(String logString) {
     def uri = "https://${hostname}"
-    def path = "/api/${org}/stream1/_json"
+    def path = "/api/${org}/${stream}/_json"
     def headers = [
         "Authorization": "Basic ${authToken}",
         "Content-Type": "application/json",
